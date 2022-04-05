@@ -1,6 +1,6 @@
 import pandas as pd
 
-from config import Config
+from facs_analysis.config import Config
 
 
 class BMImport:
