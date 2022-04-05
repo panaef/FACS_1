@@ -4,8 +4,8 @@ from facs_analysis.config import Config
 
 
 class BMImport:
-    def __init__(self):
-        self.config = Config()
+    def __init__(self, config):
+        self.config = config
 
         self.bm_gating_df = pd.read_csv(
             self.config.GATING, sep=";", index_col=0)

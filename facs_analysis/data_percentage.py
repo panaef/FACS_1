@@ -4,9 +4,9 @@ from facs_analysis.config import Config
 
 
 class DataPercentage:
-    def __init__(self, data):
+    def __init__(self, config, data):
         self.data = data
-        self.config = Config()
+        self.config = config
         self.results = None
 
         self.loop_data_multiplying_with_previous_cols()
@@ -33,10 +33,13 @@ class DataPercentage:
                 for element in concat_column_names:
                     if element in column_name:
                         working_list.append(element)
-                max_value = max(working_list, key=len)
-                self.results[column_name] = self.results[max_value] * self.data[column_name]
-                previous_col_name = str(column_name)
-                concat_column_names.append(column_name)
+                if len(working_list) == 0:
+                    print(working_list)
+                else:
+                    max_value = max(working_list, key=len)
+                    self.results[column_name] = self.results[max_value] * self.data[column_name]
+                    previous_col_name = str(column_name)
+                    concat_column_names.append(column_name)
 
     def save_file(self, filename="results_percentage.csv"):
         self.results.to_csv(self.config.OUTPUT_DIR / filename)

@@ -6,12 +6,12 @@
 # In[1]:
 
 
-import pandas as pd #package to modulate dataframes (aka tables)
-import seaborn as sns #advanced package for data visualization
-import matplotlib.pyplot as plt #basic package for data visualization
+import pandas as pd  #package to modulate dataframes (aka tables)
+import seaborn as sns  #advanced package for data visualization
+import matplotlib.pyplot as plt  #basic package for data visualization
 import numpy as np #package for numeric calculations
-import itertools #funny package to do combinatorics and other stuff
-from statannot import add_stat_annotation #package for statistical annotation
+import itertools  #funny package to do combinatorics and other stuff
+from statannot import add_stat_annotation  #package for statistical annotation
 
 
 # # Give all necessary information to run the script (read carefully the instructions!!!)
@@ -215,7 +215,7 @@ if stat_ind == "yes":
     elif single_comp == "yes":
         for pair in itertools.combinations(pairs,2):
             tuple_comp.append(pair)
-        tuple_comp = [item for item in tuples if control_group in item]
+        tuple_comp = [item for item in tuple_comp if control_group in item]
     else:
         for pair in itertools.combinations(pairs,2):
             tuple_comp.append(pair)
