@@ -4,9 +4,9 @@ from facs_analysis.config import Config
 
 
 class DataPercentage:
-    def __init__(self, data):
+    def __init__(self, config, data):
         self.data = data
-        self.config = Config()
+        self.config = config
         self.results = None
 
         self.loop_data_multiplying_with_previous_cols()
