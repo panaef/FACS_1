@@ -32,6 +32,6 @@ with the correct filepaths etc. and make sure the data is available in these
 paths.
 
 ```bash
-# run the cli script
-python ./facs_analysis/cli.py
+# run the cli script showing context actions
+python cli.py --help
 ```
