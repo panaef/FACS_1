@@ -40,8 +40,6 @@ def test_init_data_cleaning(test_config):
     actual_result_data = data_percentage.results.iloc[:1].to_dict()
 
     assert actual_result_data == expected_result_data
-    # check the output file is being created
-    assert Path("./results_percentage.csv").is_file()
 
 
 def test_data_visualizer(test_config):
