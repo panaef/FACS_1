@@ -2,7 +2,7 @@ from pathlib import Path
 
 
 class Config:
-    OUTPUT_DIR = Path.cwd()
+    OUTPUT_DIR = Path(Path.cwd(), "out")
     start_pop = "coi/db/lin-"
     order = ["B", "S"]
     organ = "BM lin-"

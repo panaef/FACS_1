@@ -3,6 +3,7 @@ from pathlib import Path
 from facs_analysis.config import Config
 from facs_analysis.data_import import BMImport
 from facs_analysis.data_percentage import DataPercentage
+from facs_analysis.data_visualizer import DataVisualizer
 
 
 def test_init_config():
@@ -41,3 +42,12 @@ def test_init_data_cleaning(test_config):
     assert actual_result_data == expected_result_data
     # check the output file is being created
     assert Path("./results_percentage.csv").is_file()
+
+
+def test_data_visualizer(test_config):
+    bm_import = BMImport(config=test_config)
+    data_percentage = DataPercentage(config=test_config, data=bm_import.bm_gating_df)
+    visualizer = DataVisualizer(config=test_config, data=bm_import.bm_gating_df, results=data_percentage.results)
+
+    # dummy assert - to be improved
+    assert isinstance(visualizer, DataVisualizer)
