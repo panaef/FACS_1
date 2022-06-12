@@ -9,27 +9,22 @@ import seaborn as sns
 from facs_analysis.config import Config
 
 # seaborn settings
-sns.set_style("ticks")
-sns.set_palette("Dark2")
+sns.set_style(Config.seaborn_style)
+sns.set_palette(Config.seaborn_palette)
 
 
 class DataVisualizer:
     split = "/"
 
-    def __init__(self, config: Config, data, results):
+    def __init__(self, config, data, results):
         self.config = config
         self.data = data
         self.results = results
 
         self.add_group()
         self.tuple_comp = self.get_group_information()
-
-        self.visualize_data_one()
-
         self.count_table = self.calculate_absolute_counts()
         self.count_table_absolute = self.calculate_absolute_counts()
-
-        self.visualize_absolute_counts()
 
     def add_group(self):
         self.results['group'] = self.results.index
@@ -56,21 +51,10 @@ class DataVisualizer:
 
         return tuple_comp
 
-    def visualize_data_one(self):
+    def plot_percentage_of_total(self):
         for column in self.results:
             if column != str("group"):
-                ax = sns.catplot(
-                    kind="bar",
-                    data=self.results,
-                    y=column,
-                    x="group",
-                    ci="sd",
-                    edgecolor="black",
-                    errcolor="black",
-                    errwidth=1.5,
-                    capsize=0.1,
-                    alpha=0.3,
-                    order=self.config.order)
+                self.set_catplot(column, self.results)
                 ax = sns.stripplot(x="group",
                                    y=column,
                                    data=self.results,
@@ -117,11 +101,9 @@ class DataVisualizer:
 
         substring = self.config.start_pop
         stringlist = []
-        count = 0
 
         # Iterate through the Percentage-Table (column by column)
         for column in self.data:
-
             if substring in column:  # check if my set substring is contained in the column name
                 if column == self.config.start_pop:
                     stringlist.append(column)
@@ -148,7 +130,21 @@ class DataVisualizer:
         count_table.to_csv(filepath)
         return count_table
 
-    def visualize_absolute_counts(self):
+    def set_catplot(self, column, table):
+        sns.catplot(
+            kind="bar",
+            data=table,
+            y=column,
+            x="group",
+            ci="sd",
+            edgecolor="black",
+            errcolor="black",
+            errwidth=1.5,
+            capsize=0.1,
+            alpha=0.3,
+            order=self.config.order)
+
+    def plot_absolute_counts(self):
         self.count_table_absolute['group'] = self.count_table_absolute.index
         self.count_table_absolute["group"] = self.count_table_absolute[
                                                  "group"].str[
@@ -156,18 +152,7 @@ class DataVisualizer:
 
         for column in self.count_table_absolute:
             if column != str("group"):
-                ax = sns.catplot(
-                    kind="bar",
-                    data=self.count_table_absolute,
-                    y=column,
-                    x="group",
-                    ci="sd",
-                    edgecolor="black",
-                    errcolor="black",
-                    errwidth=1.5,
-                    capsize=0.1,
-                    alpha=0.3,
-                    order=self.config.order)
+                self.set_catplot(column, self.count_table_absolute)
                 ax = sns.stripplot(x="group",
                                    y=column,
                                    data=self.count_table_absolute,

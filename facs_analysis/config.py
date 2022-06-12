@@ -13,6 +13,8 @@ class Config:
     stat_test = "t-test_welch"
     datatype = "png"
     size = 300
+    seaborn_style = "ticks"
+    seaborn_palette = "Dark2"
 
     def __init__(self, gating_path, cell_count, part_to_remove):
         self.GATING = Path(gating_path)
