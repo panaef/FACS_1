@@ -2,7 +2,6 @@ from pathlib import Path
 
 
 class Config:
-    CELL_COUNTS = Path("./cell_counts.csv")
     OUTPUT_DIR = Path.cwd()
     start_pop = "coi/db/lin-"
     order = ["B", "S"]
@@ -15,6 +14,7 @@ class Config:
     datatype = "png"
     size = 300
 
-    def __init__(self, gating_path, part_to_remove):
+    def __init__(self, gating_path, cell_count, part_to_remove):
         self.GATING = Path(gating_path)
+        self.CELL_COUNTS = Path(cell_count)
         self.part_to_remove = part_to_remove

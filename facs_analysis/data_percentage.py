@@ -1,7 +1,5 @@
 import pandas as pd
 
-from facs_analysis.config import Config
-
 
 class DataPercentage:
     def __init__(self, config, data):
